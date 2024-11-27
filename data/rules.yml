@@ -1,0 +1,127 @@
+version: "3.1"
+
+rules:
+
+- rule: Chao hoi
+  steps:
+  - intent: chao_hoi
+  - action: utter_chao_hoi
+
+- rule: Chuc nang
+  steps:
+  - intent: chuc_nang
+  - action: utter_chuc_nang
+
+- rule: Cam on
+  steps:
+  - intent: cam_on
+  - action: utter_cam_on
+
+- rule: Tam biet
+  steps:
+  - intent: tam_biet
+  - action: utter_tam_biet
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Hoi dia chi
+  steps:
+  - intent: dia_chi
+  - action: utter_dia_chi
+
+- rule: Hoi thoi gian
+  steps:
+  - intent: thoi_gian
+  - action: utter_thoi_gian
+
+- rule: Chua co tai khoan
+  steps:
+  - intent: no_account
+  - action: utter_no_account
+
+- rule: Van bat chap dang ky tai khoan
+  steps:
+  - intent: create_account
+  - action: utter_ask_create_account
+
+- rule: Ds teacher
+  steps:
+  - intent: teachers_list
+  - action: action_query_teachers
+
+- rule: Lay link sau khi chon teacher
+  steps:
+  - intent: choose_teacher
+  - action: action_get_link_teachers
+
+- rule: Ds khoa hoc
+  steps:
+  - intent: courses_list
+  - action: action_query_courses
+
+- rule: Tien hanh thu thap thong tin sau khi chon course bang button
+  steps:
+  - intent: choose_courseid_to_register
+  - action: action_collect_infor
+
+- rule: Ask for password after email
+  steps:
+  - intent: collect_info_register_course
+    entities:
+    - email
+  - action: action_ask_password_register_course
+
+- rule: Ask for verify code after password
+  steps:
+  - intent: collect_info_register_course
+    entities:
+    - password
+  - action: action_ask_verify_mail_register_course
+
+- rule: Chao hoi - speech
+  steps:
+  - intent: speak_chao_hoi
+  - action: action_utter_speak_chao_hoi
+
+- rule: Thoi gian - speech
+  steps:
+  - intent: speak_thoi_gian
+  - action: action_utter_speak_thoi_gian
+
+- rule: Dia chi - speech
+  steps:
+  - intent: speak_dia_chi
+  - action: action_utter_speak_dia_chi
+
+- rule: Chuc nang - speech
+  steps:
+  - intent: speak_chuc_nang
+  - action: action_utter_speak_chuc_nang
+
+- rule: Cam on - speech
+  steps:
+  - intent: speak_cam_on
+  - action: action_utter_speak_cam_on
+
+- rule: Tao tai khoan - speech
+  steps:
+  - intent: speak_ask_create_account
+  - action: action_utter_speak_ask_create_account
+
+- rule: Khong co tai khoan - speech
+  steps:
+  - intent: speak_no_account
+  - action: action_utter_speak_no_account
+
+- rule: Tam biet - speech
+  steps:
+  - intent: speak_tam_biet
+  - action: action_utter_speak_tam_biet
+
+- rule: Toi la ai - speech
+  steps:
+  - intent: speak_iamabot
+  - action: action_utter_speak_iamabot

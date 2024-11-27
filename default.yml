@@ -1,0 +1,53 @@
+recipe: default.v1
+
+assistant_id: 20240305-143448-principal-weight
+
+language: vi
+
+pipeline:
+  - name: RegexFeaturizer # Trích xuất các đặc trưng dựa trên các mẫu biểu thức chính quy.
+    case_sensitive: False
+    use_word_boundaries: True
+  - name: WhitespaceTokenizer # Phân tách câu thành các token (từ) dựa trên khoảng trắng.
+  - name: LexicalSyntacticFeaturizer # Trích xuất các đặc trưng ngữ pháp và từ vựng từ câu.
+  - name: CountVectorsFeaturizer # Chuyển đổi câu thành vector dựa trên tần suất từ (Bag of Words).
+  - name: CountVectorsFeaturizer # Chuyển đổi câu thành vector dựa trên tần suất các n-gram ký tự.
+    analyzer: char_wb
+    min_ngram: 1
+    max_ngram: 4
+  - name: DIETClassifier # Phân loại ý định và trích xuất thực thể.
+    epochs: 100
+    constrain_similarities: true
+  - name: EntitySynonymMapper # Ánh xạ các thực thể được phát hiện đến các giá trị chuẩn.
+  - name: ResponseSelector # Chọn phản hồi thích hợp dựa trên câu hỏi của người dùng.
+    epochs: 100
+    constrain_similarities: true
+  - name: FallbackClassifier # Xử lý các trường hợp mô hình không tự tin về kết quả dự đoán.
+    threshold: 0.7
+    ambiguity_threshold: 0.1
+
+policies:
+  - name: MemoizationPolicy
+  - name: RulePolicy
+    core_fallback_threshold: 0.7
+    core_fallback_action_name: action_default_fallback
+  - name: UnexpecTEDIntentPolicy
+    max_history: 5
+    epochs: 100
+  - name: TEDPolicy
+    max_history: 5
+    epochs: 100
+    constrain_similarities: true
+
+ignore_intents:
+  - speak_chao_hoi
+  - speak_thoi_gian
+  - speak_dia_chi
+  - speak_chuc_nang
+  - speak_cam_on
+  - speak_ask_create_account
+  - speak_no_account
+  - speak_tam_biet
+  - speak_iamabot
+  - choose_courseid_to_register
+  - choose_teacher

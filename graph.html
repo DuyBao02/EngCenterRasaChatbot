@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rasa Core Visualisation</title>
+    <script src="https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js"></script>
+    <script src="https://dagrejs.github.io/project/dagre/latest/dagre.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://dagrejs.github.io/project/graphlib-dot/v0.6.3/graphlib-dot.js"></script>
+</head>
+<body>
+<div id="errormsg" style="color: #b00"></div>
+<svg>
+    <style id="graph-style">
+        .node.invisible > rect {
+            display: none;
+        }
+
+        .node.start > rect {
+            fill: #7f7;
+            rx: 30;
+            ry: 18;
+        }
+
+        .node.end > rect {
+            fill: #f77;
+            rx: 30;
+            ry: 18;
+        }
+
+        .node:not(.active) > rect, .node:not(.active) > .label {
+            opacity: 0.4;
+        }
+
+        .edgePath:not(.active) path {
+            opacity: 0.4;
+        }
+
+        .node.ellipsis > rect {
+            fill: #CCC;
+        }
+
+        .node.intent > rect {
+            fill: #7ff;
+        }
+
+        .node.dashed > rect {
+            stroke-dasharray: 5;
+        }
+
+        text {
+            font-weight: 300;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serf, serif;
+            font-size: 14px;
+            color: #1f1d1d;
+        }
+
+        .node rect {
+            stroke: #444;
+            fill: #fff;
+            stroke-width: 1.5px;
+        }
+
+        .edgePath path {
+            stroke: #333;
+            stroke-width: 1.5px;
+        }
+
+        svg {
+            position: fixed;
+            top: 10px;
+            left: 0;
+            height: 100%;
+            width: 100%
+        }
+    </style>
+    <g></g>
+</svg>
+<script>
+
+  function serveGraph() {
+    let oldInputGraphValue;
+
+    const url = 'visualization.dot';
+    const refreshInterval = 500;
+
+    // trigger a refresh by fetching an updated graph
+    setInterval(function () {
+      fetch(url).then(r => r.text()).then(dot => {
+        document.getElementById('errormsg').innerHTML = '';
+        if (oldInputGraphValue === dot) return;
+
+        oldInputGraphValue = dot;
+        drawGraph(dot);
+      }).catch(err => {
+        document.getElementById('errormsg').innerHTML =
+          'Failed to update plot. (' + err.message + ')';
+      });
+    }, refreshInterval);
+  }
+
+  function drawGraph(graph) {
+    let g = graphlibDot.read(graph);
+    // Set margins, if not present
+    if (!g.graph().hasOwnProperty("marginx") &&
+      !g.graph().hasOwnProperty("marginy")) {
+      g.graph().marginx = 20;
+      g.graph().marginy = 20;
+    }
+    g.graph().transition = function (selection) {
+      return selection.transition().duration(300);
+    };
+    // Render the graph into svg g
+    d3.select("svg g").call(render, g);
+  }
+  // Set up zoom support
+  const svg = d3.select("svg"),
+    inner = d3.select("svg g"),
+    zoom = d3.zoom().on("zoom", function () {
+      inner.attr("transform", d3.event.transform);
+    });
+  svg.call(zoom);
+
+  // Create and configure the renderer
+  const render = dagreD3.render();
+
+  let isClient = false;
+  isClient = true;
+
+  if (isClient) {
+    // Mark all nodes and their edges as active
+    cssRules = document.getElementById('graph-style').sheet.cssRules;
+    cssRules[3].style.opacity = 1;
+    cssRules[4].style.opacity = 1;
+
+    let graph;
+    graph = `digraph  {
+0 [class="start active", fillcolor=green, fontsize=12, label=START, style=filled];
+"-1" [class=end, fillcolor=red, fontsize=12, label=END, style=filled];
+1 [class="", fontsize=12, label=action_collect_infor];
+2 [class="", fontsize=12, label=action_ask_password_register_course];
+3 [class="", fontsize=12, label=action_ask_verify_mail_register_course];
+4 [class="", fontsize=12, label=utter_chao_hoi];
+5 [class="", fontsize=12, label=action_utter_speak_chao_hoi];
+6 [class="", fontsize=12, label=utter_no_account];
+7 [class="", fontsize=12, label=action_utter_speak_no_account];
+8 [class="", fontsize=12, label=action_query_teachers];
+9 [class="", fontsize=12, label=utter_chuc_nang];
+10 [class="", fontsize=12, label=action_utter_speak_chuc_nang];
+11 [class="", fontsize=12, label=utter_cam_on];
+12 [class="", fontsize=12, label=action_utter_speak_cam_on];
+13 [class="", fontsize=12, label=utter_iamabot];
+14 [class="", fontsize=12, label=action_utter_speak_iamabot];
+15 [class="", fontsize=12, label=action_query_courses];
+19 [class="", fontsize=12, label=action_query_teachers];
+20 [class="", fontsize=12, label=utter_dia_chi];
+21 [class="", fontsize=12, label=action_utter_speak_dia_chi];
+33 [class="", fontsize=12, label=utter_thoi_gian];
+34 [class="", fontsize=12, label=action_utter_speak_thoi_gian];
+35 [class="", fontsize=12, label=utter_no_account];
+49 [class="", fontsize=12, label=action_query_teachers];
+59 [class="", fontsize=12, label=utter_tam_biet];
+60 [class="", fontsize=12, label=action_utter_speak_tam_biet];
+63 [class="", fontsize=12, label=action_query_courses];
+64 [class="", fontsize=12, label=action_query_teachers];
+83 [class="", fontsize=12, label=utter_ask_create_account];
+84 [class="", fontsize=12, label=action_utter_speak_ask_create_account];
+91 [class="", fontsize=12, label=action_query_teachers];
+119 [class="", fontsize=12, label=action_query_teachers];
+200 [class="", fontsize=12, label=action_query_teachers];
+214 [class=intent, fillcolor=lightblue, label="/choose_courseid_to_register", shape=rect, style=filled];
+215 [class=intent, fillcolor=lightblue, label=hi, shape=rect, style=filled];
+216 [class=intent, fillcolor=lightblue, label="có những lớp học nào đang mở ở trung tâm hiện nay?", shape=rect, style=filled];
+217 [class=intent, fillcolor=lightblue, label="làm sao để đăng ký một tài khoản mới trên trang này?", shape=rect, style=filled];
+218 [class=intent, fillcolor=lightblue, label="làm thế nào để đăng ký tài khoản trên hệ thống này?", shape=rect, style=filled];
+219 [class=intent, fillcolor=lightblue, label="bạn có thể thực hiện những tác vụ nào?", shape=rect, style=filled];
+220 [class=intent, fillcolor=lightblue, label="có phải bạn là một phần mềm tự động trả lời không?", shape=rect, style=filled];
+221 [class=intent, fillcolor=lightblue, label="Có thể cung cấp thông tin về địa chỉ của trung tâm không?", shape=rect, style=filled];
+222 [class=intent, fillcolor=lightblue, label="dang ky tai khoan moi", shape=rect, style=filled];
+223 [class=intent, fillcolor=lightblue, label="password tôi sử dụng là KhongConGiDeNoi", shape=rect, style=filled];
+224 [class=intent, fillcolor=lightblue, label="ngvanA@gmail.com la email cua toi", shape=rect, style=filled];
+225 [class=intent, fillcolor=lightblue, label="xin được biết danh sách đầy đủ các giáo viên đang phụ trách các khóa học ở đây", shape=rect, style=filled];
+226 [class=intent, fillcolor=lightblue, label="hẹn gặp lại vào lần sau nhé", shape=rect, style=filled];
+227 [class=intent, fillcolor=lightblue, label="Có những ai là giáo viên ở đây?", shape=rect, style=filled];
+228 [class=intent, fillcolor=lightblue, label="Tôi muốn sử dụng dịch vụ nhưng chưa có tài khoản", shape=rect, style=filled];
+229 [class=intent, fillcolor=lightblue, label="chân thành cảm ơn", shape=rect, style=filled];
+230 [class=intent, fillcolor=lightblue, label="Cho tôi biết trung tâm đặt ở đâu vậy?", shape=rect, style=filled];
+231 [class=intent, fillcolor=lightblue, label="Danh sách giảng viên đang giảng dạy ở đâu?", shape=rect, style=filled];
+232 [class=intent, fillcolor=lightblue, label="/speak_chao_hoi", shape=rect, style=filled];
+233 [class=intent, fillcolor=lightblue, label="làm thế nào để đăng ký tài khoản trên hệ thống này?", shape=rect, style=filled];
+234 [class=intent, fillcolor=lightblue, label="/choose_courseid_to_register", shape=rect, style=filled];
+235 [class=intent, fillcolor=lightblue, label="Có ai là giáo viên tại trung tâm hiện tại không?", shape=rect, style=filled];
+236 [class=intent, fillcolor=lightblue, label="có thể làm gì?", shape=rect, style=filled];
+237 [class=intent, fillcolor=lightblue, label="Bạn là trí tuệ nhân tạo phải không?", shape=rect, style=filled];
+238 [class=intent, fillcolor=lightblue, label="cho tôi xem danh sách các khóa học đang có tại trung tâm", shape=rect, style=filled];
+239 [class=intent, fillcolor=lightblue, label="tài khoản đăng ký như nào?", shape=rect, style=filled];
+240 [class=intent, fillcolor=lightblue, label="/speak_no_account", shape=rect, style=filled];
+241 [class=intent, fillcolor=lightblue, label="Xin danh sách giáo viên hiện đang làm việc", shape=rect, style=filled];
+242 [class=intent, fillcolor=lightblue, label="tôi cần đăng ký tài khoản mới", shape=rect, style=filled];
+243 [class=intent, fillcolor=lightblue, label="hay quá", shape=rect, style=filled];
+244 [class=intent, fillcolor=lightblue, label="có những lớp học nào đang mở ở trung tâm hiện nay?", shape=rect, style=filled];
+245 [class=intent, fillcolor=lightblue, label="Có thể cung cấp thông tin về địa chỉ của trung tâm không?", shape=rect, style=filled];
+246 [class=intent, fillcolor=lightblue, label="hẹn gặp lại vào lần sau nhé", shape=rect, style=filled];
+247 [class=intent, fillcolor=lightblue, label="chức năng chính của bạn là gì?", shape=rect, style=filled];
+248 [class=intent, fillcolor=lightblue, label="cho biết thời gian hoạt động và giờ đóng cửa của trung tâm?", shape=rect, style=filled];
+249 [class=intent, fillcolor=lightblue, label="/speak_chuc_nang", shape=rect, style=filled];
+250 [class=intent, fillcolor=lightblue, label="cam on rat nhieu", shape=rect, style=filled];
+251 [class=intent, fillcolor=lightblue, label="có những lớp học nào đang mở ở trung tâm hiện nay?", shape=rect, style=filled];
+252 [class=intent, fillcolor=lightblue, label="xin vui lòng cung cấp thông tin về địa chỉ của trung tâm.", shape=rect, style=filled];
+253 [class=intent, fillcolor=lightblue, label="thời gian mở cửa và đóng cửa của trung tâm là khi nào?", shape=rect, style=filled];
+254 [class=intent, fillcolor=lightblue, label="toi can dang ky tai khoan moi", shape=rect, style=filled];
+255 [class=intent, fillcolor=lightblue, label="/speak_cam_on", shape=rect, style=filled];
+256 [class=intent, fillcolor=lightblue, label="bot có phải là bạn không?", shape=rect, style=filled];
+257 [class=intent, fillcolor=lightblue, label="Danh sách giảng viên đang giảng dạy ở đâu?", shape=rect, style=filled];
+258 [class=intent, fillcolor=lightblue, label="bạn có thể hỗ trợ tôi như thế nào?", shape=rect, style=filled];
+259 [class=intent, fillcolor=lightblue, label="Danh sách giảng viên đang giảng dạy ở đâu?", shape=rect, style=filled];
+260 [class=intent, fillcolor=lightblue, label="khi nào trung tâm mở cửa và đóng cửa?", shape=rect, style=filled];
+261 [class=intent, fillcolor=lightblue, label="Tạm biệt bạn, hẹn gặp lại vào dịp khác nhé", shape=rect, style=filled];
+262 [class=intent, fillcolor=lightblue, label="/speak_iamabot", shape=rect, style=filled];
+263 [class=intent, fillcolor=lightblue, label="bạn giúp gì được cho tôi?", shape=rect, style=filled];
+264 [class=intent, fillcolor=lightblue, label="Có những khóa học cụ thể nào đang được mở tại trung tâm trong thời gian này?", shape=rect, style=filled];
+265 [class=intent, fillcolor=lightblue, label="/choose_courseid_to_register", shape=rect, style=filled];
+266 [class=intent, fillcolor=lightblue, label="trung tâm có địa chỉ ở đâu?", shape=rect, style=filled];
+267 [class=intent, fillcolor=lightblue, label="/speak_dia_chi", shape=rect, style=filled];
+268 [class=intent, fillcolor=lightblue, label="Nhiệm vụ của bạn là gì trong hệ thống?", shape=rect, style=filled];
+269 [class=intent, fillcolor=lightblue, label="cảm ơn vì đã hỗ trợ", shape=rect, style=filled];
+270 [class=intent, fillcolor=lightblue, label="thời gian hoạt động của trung tâm là bao lâu mỗi ngày?", shape=rect, style=filled];
+271 [class=intent, fillcolor=lightblue, label=baibai, shape=rect, style=filled];
+272 [class=intent, fillcolor=lightblue, label="/speak_thoi_gian", shape=rect, style=filled];
+273 [class=intent, fillcolor=lightblue, label="Bạn có thể cung cấp danh sách các khóa học đang mở ở trung tâm không?", shape=rect, style=filled];
+274 [class=intent, fillcolor=lightblue, label="cho biết tên các giáo viên đang có mặt trong đội ngũ giảng dạy của trung tâm", shape=rect, style=filled];
+275 [class=intent, fillcolor=lightblue, label="Địa chỉ cụ thể của trung tâm có thể được mô tả như thế nào?", shape=rect, style=filled];
+276 [class=intent, fillcolor=lightblue, label="tôi đi đây", shape=rect, style=filled];
+277 [class=intent, fillcolor=lightblue, label="Cung cấp thông tin về các khóa học đang mở tại trung tâm không?", shape=rect, style=filled];
+278 [class=intent, fillcolor=lightblue, label="Tôi cần tạo một tài khoản để truy cập vào dịch vụ", shape=rect, style=filled];
+279 [class=intent, fillcolor=lightblue, label="Tạm biệt bạn, hẹn gặp lại vào dịp khác nhé", shape=rect, style=filled];
+280 [class=intent, fillcolor=lightblue, label="/speak_tam_biet", shape=rect, style=filled];
+281 [class=intent, fillcolor=lightblue, label="Có những ai là giáo viên ở đây?", shape=rect, style=filled];
+282 [class=intent, fillcolor=lightblue, label="hay quá", shape=rect, style=filled];
+283 [class=intent, fillcolor=lightblue, label="/speak_ask_create_account", shape=rect, style=filled];
+284 [class=intent, fillcolor=lightblue, label="hay day", shape=rect, style=filled];
+285 [class=intent, fillcolor=lightblue, label="Khóa học nào đang được mở ở trung tâm?", shape=rect, style=filled];
+286 [class=intent, fillcolor=lightblue, label="Tôi chưa có tài khoản để sử dụng", shape=rect, style=filled];
+287 [class=intent, fillcolor=lightblue, label="Xin vui lòng cho biết giờ làm việc của trung tâm", shape=rect, style=filled];
+288 [class=intent, fillcolor=lightblue, label="toi can dang ky tai khoan moi", shape=rect, style=filled];
+289 [class=intent, fillcolor=lightblue, label="Tôi chưa đăng ký tài khoản trên nền tảng này", shape=rect, style=filled];
+0 -> 214  [class="", key=0];
+0 -> 215  [class="", key=0];
+0 -> 216  [class="", key=0];
+0 -> 217  [class="", key=0];
+0 -> 218  [class="", key=0];
+0 -> 219  [class="", key=0];
+0 -> 220  [class="", key=0];
+0 -> 221  [class="", key=0];
+0 -> 222  [class="", key=0];
+1 -> 223  [class="", key=0];
+2 -> 224  [class="", key=0];
+3 -> "-1"  [class="", key=NONE, label=""];
+3 -> 225  [class="", key=0];
+3 -> 226  [class="", key=0];
+3 -> 227  [class="", key=0];
+3 -> 228  [class="", key=0];
+3 -> 229  [class="", key=0];
+3 -> 230  [class="", key=0];
+3 -> 231  [class="", key=0];
+4 -> 232  [class="", key=0];
+5 -> 233  [class="", key=0];
+5 -> 234  [class="", key=0];
+5 -> 235  [class="", key=0];
+5 -> 236  [class="", key=0];
+5 -> 237  [class="", key=0];
+5 -> 238  [class="", key=0];
+5 -> 239  [class="", key=0];
+6 -> 240  [class="", key=0];
+7 -> "-1"  [class="", key=NONE, label=""];
+7 -> 241  [class="", key=0];
+7 -> 242  [class="", key=0];
+7 -> 243  [class="", key=0];
+7 -> 244  [class="", key=0];
+7 -> 245  [class="", key=0];
+7 -> 246  [class="", key=0];
+8 -> 247  [class="", key=0];
+8 -> 248  [class="", key=0];
+9 -> 249  [class="", key=0];
+10 -> "-1"  [class="", key=NONE, label=""];
+10 -> 250  [class="", key=0];
+10 -> 251  [class="", key=0];
+10 -> 252  [class="", key=0];
+10 -> 253  [class="", key=0];
+10 -> 254  [class="", key=0];
+11 -> 255  [class="", key=0];
+12 -> "-1"  [class="", key=NONE, label=""];
+12 -> 256  [class="", key=0];
+12 -> 257  [class="", key=0];
+12 -> 258  [class="", key=0];
+12 -> 259  [class="", key=0];
+12 -> 260  [class="", key=0];
+12 -> 261  [class="", key=0];
+13 -> 262  [class="", key=0];
+14 -> "-1"  [class="", key=NONE, label=""];
+14 -> 263  [class="", key=0];
+14 -> 264  [class="", key=0];
+15 -> 265  [class="", key=0];
+19 -> 266  [class="", key=0];
+20 -> 267  [class="", key=0];
+21 -> 268  [class="", key=0];
+21 -> 269  [class="", key=0];
+21 -> 270  [class="", key=0];
+21 -> 271  [class="", key=0];
+33 -> 272  [class="", key=0];
+34 -> "-1"  [class="", key=NONE, label=""];
+34 -> 273  [class="", key=0];
+34 -> 274  [class="", key=0];
+34 -> 275  [class="", key=0];
+34 -> 276  [class="", key=0];
+35 -> 277  [class="", key=0];
+49 -> "-1"  [class="", key=NONE, label=""];
+49 -> 278  [class="", key=0];
+49 -> 279  [class="", key=0];
+59 -> 280  [class="", key=0];
+60 -> "-1"  [class="", key=NONE, label=""];
+63 -> 281  [class="", key=0];
+64 -> 282  [class="", key=0];
+83 -> 283  [class="", key=0];
+84 -> "-1"  [class="", key=NONE, label=""];
+84 -> 284  [class="", key=0];
+84 -> 285  [class="", key=0];
+84 -> 286  [class="", key=0];
+91 -> 287  [class="", key=0];
+119 -> 288  [class="", key=0];
+200 -> 289  [class="", key=0];
+214 -> 1  [class="", key=0];
+215 -> 4  [class="", key=0];
+216 -> 15  [class="", key=0];
+217 -> 35  [class="", key=0];
+218 -> 6  [class="", key=0];
+219 -> 9  [class="", key=0];
+220 -> 13  [class="", key=0];
+221 -> 20  [class="", key=0];
+222 -> 83  [class="", key=0];
+223 -> 2  [class="", key=0];
+224 -> 3  [class="", key=0];
+225 -> 19  [class="", key=0];
+226 -> 59  [class="", key=0];
+227 -> 200  [class="", key=0];
+228 -> 6  [class="", key=0];
+229 -> 11  [class="", key=0];
+230 -> 20  [class="", key=0];
+231 -> 64  [class="", key=0];
+232 -> 5  [class="", key=0];
+233 -> 6  [class="", key=0];
+234 -> 1  [class="", key=0];
+235 -> 91  [class="", key=0];
+236 -> 9  [class="", key=0];
+237 -> 13  [class="", key=0];
+238 -> 15  [class="", key=0];
+239 -> 83  [class="", key=0];
+240 -> 7  [class="", key=0];
+241 -> 8  [class="", key=0];
+242 -> 83  [class="", key=0];
+243 -> 11  [class="", key=0];
+244 -> 15  [class="", key=0];
+245 -> 20  [class="", key=0];
+246 -> 59  [class="", key=0];
+247 -> 9  [class="", key=0];
+248 -> 33  [class="", key=0];
+249 -> 10  [class="", key=0];
+250 -> 11  [class="", key=0];
+251 -> 63  [class="", key=0];
+252 -> 20  [class="", key=0];
+253 -> 33  [class="", key=0];
+254 -> 83  [class="", key=0];
+255 -> 12  [class="", key=0];
+256 -> 13  [class="", key=0];
+257 -> 49  [class="", key=0];
+258 -> 9  [class="", key=0];
+259 -> 19  [class="", key=0];
+260 -> 33  [class="", key=0];
+261 -> 59  [class="", key=0];
+262 -> 14  [class="", key=0];
+263 -> 9  [class="", key=0];
+264 -> 15  [class="", key=0];
+265 -> 1  [class="", key=0];
+266 -> 20  [class="", key=0];
+267 -> 21  [class="", key=0];
+268 -> 9  [class="", key=0];
+269 -> 11  [class="", key=0];
+270 -> 33  [class="", key=0];
+271 -> 59  [class="", key=0];
+272 -> 34  [class="", key=0];
+273 -> 15  [class="", key=0];
+274 -> 119  [class="", key=0];
+275 -> 20  [class="", key=0];
+276 -> 59  [class="", key=0];
+277 -> 15  [class="", key=0];
+278 -> 6  [class="", key=0];
+279 -> 59  [class="", key=0];
+280 -> 60  [class="", key=0];
+281 -> 64  [class="", key=0];
+282 -> 11  [class="", key=0];
+283 -> 84  [class="", key=0];
+284 -> 11  [class="", key=0];
+285 -> 15  [class="", key=0];
+286 -> 6  [class="", key=0];
+287 -> 33  [class="", key=0];
+288 -> 83  [class="", key=0];
+289 -> 6  [class="", key=0];
+}
+`;
+    drawGraph(graph);
+  } else {
+    serveGraph();
+  }
+
+
+</script>
+</body>
+</html>

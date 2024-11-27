@@ -1,0 +1,175 @@
+version: "3.1"
+
+intents:
+  - chao_hoi
+  - chuc_nang
+  - tam_biet
+  - bot_challenge
+  - cam_on
+  - thoi_gian
+  - dia_chi
+  - teachers_list
+  - choose_teacher
+  - choose_courseid_to_register
+  - courses_list
+  - no_account
+  - collect_info_register_course
+  - create_account
+  - speak_chao_hoi
+  - speak_thoi_gian
+  - speak_dia_chi
+  - speak_chuc_nang
+  - speak_cam_on
+  - speak_ask_create_account
+  - speak_no_account
+  - speak_tam_biet
+  - speak_iamabot
+
+entities:
+  - teacher_id
+  - course_id
+  - email
+  - password
+
+slots:
+  teacher_id:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: teacher_id
+
+  course_id:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: course_id
+
+  email:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: email
+    
+  password:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: password
+
+regex_features:
+  email:
+    - pattern: "\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Z|a-z]{2,}\\b"
+  password:
+    - pattern: "\\b[A-Za-z0-9@#$%^&+=]{8,}\\b"
+
+responses:
+  utter_chao_hoi:
+    - text: "Xin chào, tôi là chatbot hỗ trợ tiếng việt về các vấn đề của Trung tâm Tiếng Anh DBEC, sau đây là những thông tin bạn có thể tìm hiểu, rất hân hạnh được giúp bạn!"
+      buttons:
+        - title: "🔊"
+          payload: '/speak_chao_hoi'
+        - title: "Địa chỉ trung tâm"
+          payload: 'Trung tâm nằm ở đâu ?'
+        - title: "Thời gian mở cửa"
+          payload: 'Trung tâm mở cửa vào thời gian nào ?'
+        - title: "Chức năng"
+          payload: 'Chức năng của bạn là gì?'
+
+  utter_thoi_gian:
+    - text: "Trung tâm DBEC bắt đầu mở cửa hoạt động từ 7h30, đến 21h30 sẽ đóng cửa trừ ngày lễ và Chủ nhật. Nếu bạn có vấn đề gì hãy đến vào thời gian này. Chúng tôi rất hoan nghênh bạn!"
+      buttons:
+        - title: "🔊"
+          payload: '/speak_thoi_gian'
+
+  utter_dia_chi:
+    - text: "Địa chỉ của Trung tâm tại Trường Công Nghệ Thông Tin và Truyền Thông thuộc Trường Đại Học Cần Thơ Khu II, đường 3/2, Xuân Khánh, Ninh Kiều, Cần Thơ. Cách thức liên lạc thì bạn có thể xem trang này nhé http://localhost:8001/contact"
+      buttons:
+        - title: "🔊"
+          payload: '/speak_dia_chi'
+
+  utter_chuc_nang:
+    - text: "Những điều mà tôi có thể giúp bạn là trả lời những câu hỏi liên quan đến trung tâm. Hơn thế thì tôi cũng sẽ giúp bạn đăng ký khóa học cho học viên luôn đấy nhé!"
+      buttons:
+        - title: "🔊"
+          payload: '/speak_chuc_nang'
+        - title: "Danh sách khóa học hiện có"
+          payload: 'Danh sách khóa học hiện có'
+
+  utter_ask_email:
+    - text: "(1) Để đăng ký khóa học {course_id}, bạn cần thực hiện các bước sau, đầu tiên hãy nhập _EMAIL_ để chúng tôi biết bạn là ai? Nếu chưa có tài khoản thành viên, hãy vào \n_http://localhost:8001/register_ để thực hiện việc đăng ký!"
+
+  utter_ask_password:
+    - text: "(2) Có email thì phải có mật khẩu đúng không? Hãy nhập mật khẩu mà bạn đã đăng ký với _{email}_ bạn cung cấp ở trên nhé!"
+  
+  utter_ask_verify_email:
+    - text: "(3) Cuối cùng vì lý do bảo mật, có một email xác thực đã gửi đến email của bạn, vui lòng nhập nó để hoàn thành việc đăng ký khóa học."
+
+  utter_cam_on:
+    - text: "Không có gì đâu, vấn đề của bạn là vấn đề của tôi!"
+      buttons:
+        - title: "🔊"
+          payload: '/speak_cam_on'
+  
+  utter_ask_create_account:
+    - text: "Rất tiếc nhưng quá trình để tôi có thể đăng ký tài khoản giúp bạn vẫn đang được phát triển, đợi tôi nhé!"
+      buttons:
+        - title: "🔊"
+          payload: '/speak_ask_create_account'
+
+  utter_no_account:
+    - text: "Nếu bạn chưa có tài khoản. Hãy truy cập vào đường link sau: \n_http://localhost:8001/register_ 
+            \nSau khi có tài khoản, bạn có thể đăng ký khóa học rồi đó! Hoặc tôi cũng có thể giúp bạn đăng ký khóa học"
+      buttons:
+        - title: "🔊"
+          payload: '/speak_no_account'
+
+  utter_tam_biet:
+    - text: "Chúc bạn có một ngày tốt lành <3"
+      buttons:
+        - title: "🔊"
+          payload: '/speak_tam_biet'
+
+  utter_iamabot:
+    - text: "Tôi là botchat tiếng việt hỗ trợ và giúp bạn tìm hiểu về Trung tâm Tiếng Anh DBEC."
+      buttons:
+        - title: "🔊"
+          payload: '/speak_iamabot'
+
+actions:
+  - utter_chao_hoi
+  - utter_tam_biet
+  - utter_iamabot
+  - utter_cam_on
+  - utter_chuc_nang
+  - utter_dia_chi
+  - utter_thoi_gian
+  - utter_no_account
+  - utter_ask_email
+  - utter_ask_password
+  - utter_ask_verify_email
+  - utter_ask_create_account
+  - action_query_teachers
+  - action_get_link_teachers
+  - action_query_courses
+  - action_collect_infor
+  - action_ask_password_register_course
+  - action_ask_verify_mail_register_course
+  - action_register_course
+  - action_default_fallback
+  - action_utter_speak_chao_hoi
+  - action_utter_speak_thoi_gian
+  - action_utter_speak_dia_chi
+  - action_utter_speak_chuc_nang
+  - action_utter_speak_cam_on
+  - action_utter_speak_ask_create_account
+  - action_utter_speak_no_account
+  - action_utter_speak_tam_biet
+  - action_utter_speak_iamabot
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

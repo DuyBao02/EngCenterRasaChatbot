@@ -1,0 +1,537 @@
+version: "3.1"
+
+stories:
+
+- story: chao-dsteachers-thoigian-dscourses-dkkhoahoc-chuacotk-tambiet
+  steps:
+  - intent: chao_hoi
+  - action: utter_chao_hoi
+  - intent: speak_chao_hoi
+  - action: action_utter_speak_chao_hoi
+  - intent: teachers_list
+  - action: action_query_teachers
+  - intent: thoi_gian
+  - action: utter_thoi_gian
+  - intent: speak_thoi_gian
+  - action: action_utter_speak_thoi_gian
+  - intent: courses_list
+  - action: action_query_courses
+  - intent: choose_courseid_to_register
+  - action: action_collect_infor
+  - intent: collect_info_register_course
+    entities:
+    - email
+  - action: action_ask_password_register_course
+  - intent: collect_info_register_course
+    entities:
+    - password
+  - action: action_ask_verify_mail_register_course
+  - intent: no_account
+  - action: utter_no_account
+  - intent: speak_no_account
+  - action: action_utter_speak_no_account
+  - intent: tam_biet
+  - action: utter_tam_biet
+  - intent: speak_tam_biet
+  - action: action_utter_speak_tam_biet
+
+- story: chao-chucnang-diachi-thoigian-dsteachers-taotk
+  steps:
+  - intent: chao_hoi
+  - action: utter_chao_hoi
+  - intent: speak_chao_hoi
+  - action: action_utter_speak_chao_hoi
+  - intent: chuc_nang
+  - action: utter_chuc_nang
+  - intent: speak_chuc_nang
+  - action: action_utter_speak_chuc_nang
+  - intent: dia_chi
+  - action: utter_dia_chi
+  - intent: speak_dia_chi
+  - action: action_utter_speak_dia_chi
+  - intent: thoi_gian
+  - action: utter_thoi_gian
+  - intent: speak_thoi_gian
+  - action: action_utter_speak_thoi_gian
+  - intent: teachers_list
+  - action: action_query_teachers
+  - intent: create_account
+  - action: utter_ask_create_account
+  - intent: speak_ask_create_account
+  - action: action_utter_speak_ask_create_account
+
+- story: chao-tenbot-dscourses-dkkhoahoc-chuacotk-dsteachers-thoigian-tambiet
+  steps:
+  - intent: chao_hoi
+  - action: utter_chao_hoi
+  - intent: speak_chao_hoi
+  - action: action_utter_speak_chao_hoi
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - intent: speak_iamabot
+  - action: action_utter_speak_iamabot
+  - intent: courses_list
+  - action: action_query_courses
+  - intent: choose_courseid_to_register
+  - action: action_collect_infor
+  - intent: collect_info_register_course
+    entities:
+    - email
+  - action: action_ask_password_register_course
+  - intent: collect_info_register_course
+    entities:
+    - password
+  - action: action_ask_verify_mail_register_course
+  - intent: no_account
+  - action: utter_no_account
+  - intent: speak_no_account
+  - action: action_utter_speak_no_account
+  - intent: teachers_list
+  - action: action_query_teachers
+  - intent: thoi_gian
+  - action: utter_thoi_gian
+  - intent: speak_thoi_gian
+  - action: action_utter_speak_thoi_gian
+  - intent: tam_biet
+  - action: utter_tam_biet
+  - intent: speak_tam_biet
+  - action: action_utter_speak_tam_biet
+
+- story: chao-taotk-dscourses-dkkhoahoc-diachi-camon-tambiet
+  steps:
+  - intent: chao_hoi
+  - action: utter_chao_hoi
+  - intent: speak_chao_hoi
+  - action: action_utter_speak_chao_hoi
+  - intent: create_account
+  - action: utter_ask_create_account
+  - intent: speak_ask_create_account
+  - action: action_utter_speak_ask_create_account
+  - intent: courses_list
+  - action: action_query_courses
+  - intent: choose_courseid_to_register
+  - action: action_collect_infor
+  - intent: collect_info_register_course
+    entities:
+    - email
+  - action: action_ask_password_register_course
+  - intent: collect_info_register_course
+    entities:
+    - password
+  - action: action_ask_verify_mail_register_course
+  - intent: dia_chi
+  - action: utter_dia_chi
+  - intent: speak_dia_chi
+  - action: action_utter_speak_dia_chi
+  - intent: cam_on
+  - action: utter_cam_on
+  - intent: speak_cam_on
+  - action: action_utter_speak_cam_on
+  - intent: tam_biet
+  - action: utter_tam_biet
+  - intent: speak_tam_biet
+  - action: action_utter_speak_tam_biet
+
+- story: chao-tenbot-chucnang-thoigian-dsteachers-taotk-chuacotk-diachi-camon
+  steps:
+  - intent: chao_hoi
+  - action: utter_chao_hoi
+  - intent: speak_chao_hoi
+  - action: action_utter_speak_chao_hoi
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - intent: speak_iamabot
+  - action: action_utter_speak_iamabot
+  - intent: chuc_nang
+  - action: utter_chuc_nang
+  - intent: speak_chuc_nang
+  - action: action_utter_speak_chuc_nang
+  - intent: thoi_gian
+  - action: utter_thoi_gian
+  - intent: speak_thoi_gian
+  - action: action_utter_speak_thoi_gian
+  - intent: teachers_list
+  - action: action_query_teachers
+  - intent: create_account
+  - action: utter_ask_create_account
+  - intent: speak_ask_create_account
+  - action: action_utter_speak_ask_create_account
+  - intent: no_account
+  - action: utter_no_account
+  - intent: speak_no_account
+  - action: action_utter_speak_no_account
+  - intent: dia_chi
+  - action: utter_dia_chi
+  - intent: speak_dia_chi
+  - action: action_utter_speak_dia_chi
+  - intent: cam_on
+  - action: utter_cam_on
+  - intent: speak_cam_on
+  - action: action_utter_speak_cam_on
+
+- story: chucnang-thoigian-diachi-camon-dsteachers-tambiet
+  steps:
+  - intent: chuc_nang
+  - action: utter_chuc_nang
+  - intent: speak_chuc_nang
+  - action: action_utter_speak_chuc_nang
+  - intent: thoi_gian
+  - action: utter_thoi_gian
+  - intent: speak_thoi_gian
+  - action: action_utter_speak_thoi_gian
+  - intent: dia_chi
+  - action: utter_dia_chi
+  - intent: speak_dia_chi
+  - action: action_utter_speak_dia_chi
+  - intent: cam_on
+  - action: utter_cam_on
+  - intent: speak_cam_on
+  - action: action_utter_speak_cam_on
+  - intent: teachers_list
+  - action: action_query_teachers
+  - intent: tam_biet
+  - action: utter_tam_biet
+  - intent: speak_tam_biet
+  - action: action_utter_speak_tam_biet
+
+- story: chucnang-taotk-dscourses-dkkhoahoc-camon-dsteachers-diachi-tambiet
+  steps:
+  - intent: chuc_nang
+  - action: utter_chuc_nang
+  - intent: speak_chuc_nang
+  - action: action_utter_speak_chuc_nang
+  - intent: create_account
+  - action: utter_ask_create_account
+  - intent: speak_ask_create_account
+  - action: action_utter_speak_ask_create_account
+  - intent: courses_list
+  - action: action_query_courses
+  - intent: choose_courseid_to_register
+  - action: action_collect_infor
+  - intent: collect_info_register_course
+    entities:
+    - email
+  - action: action_ask_password_register_course
+  - intent: collect_info_register_course
+    entities:
+    - password
+  - action: action_ask_verify_mail_register_course
+  - intent: cam_on
+  - action: utter_cam_on
+  - intent: speak_cam_on
+  - action: action_utter_speak_cam_on
+  - intent: teachers_list
+  - action: action_query_teachers
+  - intent: dia_chi
+  - action: utter_dia_chi
+  - intent: speak_dia_chi
+  - action: action_utter_speak_dia_chi
+  - intent: tam_biet
+  - action: utter_tam_biet
+  - intent: speak_tam_biet
+  - action: action_utter_speak_tam_biet
+
+- story: taotk-dscourses-dkkhoahoc-dsteachers-chuacotk
+  steps:
+  - intent: create_account
+  - action: utter_ask_create_account
+  - intent: speak_ask_create_account
+  - action: action_utter_speak_ask_create_account
+  - intent: courses_list
+  - action: action_query_courses
+  - intent: choose_courseid_to_register
+  - action: action_collect_infor
+  - intent: collect_info_register_course
+    entities:
+    - email
+  - action: action_ask_password_register_course
+  - intent: collect_info_register_course
+    entities:
+    - password
+  - action: action_ask_verify_mail_register_course
+  - intent: teachers_list
+  - action: action_query_teachers
+  - intent: no_account
+  - action: utter_no_account
+  - intent: speak_no_account
+  - action: action_utter_speak_no_account
+
+- story: chucnang-taotk-dscourses-dkkhoahoc-dsteachers-camon
+  steps:
+  - intent: chuc_nang
+  - action: utter_chuc_nang
+  - intent: speak_chuc_nang
+  - action: action_utter_speak_chuc_nang
+  - intent: create_account
+  - action: utter_ask_create_account
+  - intent: speak_ask_create_account
+  - action: action_utter_speak_ask_create_account
+  - intent: courses_list
+  - action: action_query_courses
+  - intent: choose_courseid_to_register
+  - action: action_collect_infor
+  - intent: collect_info_register_course
+    entities:
+    - email
+  - action: action_ask_password_register_course
+  - intent: collect_info_register_course
+    entities:
+    - password
+  - action: action_ask_verify_mail_register_course
+  - intent: teachers_list
+  - action: action_query_teachers
+  - intent: cam_on
+  - action: utter_cam_on
+  - intent: speak_cam_on
+  - action: action_utter_speak_cam_on
+
+- story: dkkhoahoc
+  steps:
+  - intent: choose_courseid_to_register
+  - action: action_collect_infor
+  - intent: collect_info_register_course
+    entities:
+    - email
+  - action: action_ask_password_register_course
+  - intent: collect_info_register_course
+    entities:
+    - password
+  - action: action_ask_verify_mail_register_course
+
+- story: chao-chuacotk-dsteachers-chucnang-camon-tenbot
+  steps:
+  - intent: chao_hoi
+  - action: utter_chao_hoi
+  - intent: speak_chao_hoi
+  - action: action_utter_speak_chao_hoi
+  - intent: no_account
+  - action: utter_no_account
+  - intent: speak_no_account
+  - action: action_utter_speak_no_account
+  - intent: teachers_list
+  - action: action_query_teachers
+  - intent: chuc_nang
+  - action: utter_chuc_nang
+  - intent: speak_chuc_nang
+  - action: action_utter_speak_chuc_nang
+  - intent: cam_on
+  - action: utter_cam_on
+  - intent: speak_cam_on
+  - action: action_utter_speak_cam_on
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - intent: speak_iamabot
+  - action: action_utter_speak_iamabot
+
+- story: dscourses-dkkhoahoc-dsteachers-diachi-chucnang
+  steps:
+  - intent: courses_list
+  - action: action_query_courses
+  - intent: choose_courseid_to_register
+  - action: action_collect_infor
+  - intent: collect_info_register_course
+    entities:
+    - email
+  - action: action_ask_password_register_course
+  - intent: collect_info_register_course
+    entities:
+    - password
+  - action: action_ask_verify_mail_register_course
+  - intent: teachers_list
+  - action: action_query_teachers
+  - intent: dia_chi
+  - action: utter_dia_chi
+  - intent: speak_dia_chi
+  - action: action_utter_speak_dia_chi
+  - intent: chuc_nang
+  - action: utter_chuc_nang
+  - intent: speak_chuc_nang
+  - action: action_utter_speak_chuc_nang
+
+- story: chao-dscourses-dkkhoahoc-chuacotk-dsteachers-thoigian
+  steps:
+  - intent: chao_hoi
+  - action: utter_chao_hoi
+  - intent: speak_chao_hoi
+  - action: action_utter_speak_chao_hoi
+  - intent: courses_list
+  - action: action_query_courses
+  - intent: choose_courseid_to_register
+  - action: action_collect_infor
+  - intent: collect_info_register_course
+    entities:
+      - email
+  - action: action_ask_password_register_course
+  - intent: collect_info_register_course
+    entities:
+      - password
+  - action: action_ask_verify_mail_register_course
+  - intent: no_account
+  - action: utter_no_account
+  - intent: speak_no_account
+  - action: action_utter_speak_no_account
+  - intent: teachers_list
+  - action: action_query_teachers
+  - intent: thoi_gian
+  - action: utter_thoi_gian
+  - intent: speak_thoi_gian
+  - action: action_utter_speak_thoi_gian
+
+- story: chuacotk-dscourses-dkkhoahoc-dsteachers-diachi-camon
+  steps:
+  - intent: no_account
+  - action: utter_no_account
+  - intent: courses_list
+  - action: action_query_courses
+  - intent: choose_courseid_to_register
+  - action: action_collect_infor
+  - intent: collect_info_register_course
+    entities:
+      - email
+  - action: action_ask_password_register_course
+  - intent: collect_info_register_course
+    entities:
+      - password
+  - action: action_ask_verify_mail_register_course
+  - intent: teachers_list
+  - action: action_query_teachers
+  - intent: dia_chi
+  - action: utter_dia_chi
+  - intent: speak_dia_chi
+  - action: action_utter_speak_dia_chi
+  - intent: cam_on
+  - action: utter_cam_on
+  - intent: speak_cam_on
+  - action: action_utter_speak_cam_on
+
+- story: diachi-camon-dsteachers-chuacotk-camon
+  steps:
+  - intent: dia_chi
+  - action: utter_dia_chi
+  - intent: speak_dia_chi
+  - action: action_utter_speak_dia_chi
+  - intent: cam_on
+  - action: utter_cam_on
+  - intent: speak_cam_on
+  - action: action_utter_speak_cam_on
+  - intent: teachers_list
+  - action: action_query_teachers
+  - intent: no_account
+  - action: utter_no_account
+  - intent: speak_no_account
+  - action: action_utter_speak_no_account
+  - intent: cam_on
+  - action: utter_cam_on
+  - intent: speak_cam_on
+  - action: action_utter_speak_cam_on
+
+- story: chao-dkkhoahoc-tambiet
+  steps:
+  - intent: chao_hoi
+  - action: utter_chao_hoi
+  - intent: speak_chao_hoi
+  - action: action_utter_speak_chao_hoi
+  - intent: choose_courseid_to_register
+  - action: action_collect_infor
+  - intent: collect_info_register_course
+    entities:
+    - email
+  - action: action_ask_password_register_course
+  - intent: collect_info_register_course
+    entities:
+    - password
+  - action: action_ask_verify_mail_register_course
+  - intent: tam_biet
+  - action: utter_tam_biet
+  - intent: speak_tam_biet
+  - action: action_utter_speak_tam_biet
+
+- story: chucnang-dscourses-dsteachers-camon-thoigian-tambiet
+  steps:
+  - intent: chuc_nang
+  - action: utter_chuc_nang
+  - intent: speak_chuc_nang
+  - action: action_utter_speak_chuc_nang
+  - intent: courses_list
+  - action: action_query_courses
+  - intent: teachers_list
+  - action: action_query_teachers
+  - intent: cam_on
+  - action: utter_cam_on
+  - intent: speak_cam_on
+  - action: action_utter_speak_cam_on
+  - intent: thoi_gian
+  - action: utter_thoi_gian
+  - intent: speak_thoi_gian
+  - action: action_utter_speak_thoi_gian
+  - intent: tam_biet
+  - action: utter_tam_biet
+  - intent: speak_tam_biet
+  - action: action_utter_speak_tam_biet
+
+- story: tenbot-chucnang-diachi-tambiet
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+  - intent: speak_iamabot
+  - action: action_utter_speak_iamabot
+  - intent: chuc_nang
+  - action: utter_chuc_nang
+  - intent: speak_chuc_nang
+  - action: action_utter_speak_chuc_nang
+  - intent: dia_chi
+  - action: utter_dia_chi
+  - intent: speak_dia_chi
+  - action: action_utter_speak_dia_chi
+  - intent: tam_biet
+  - action: utter_tam_biet
+  - intent: speak_tam_biet
+  - action: action_utter_speak_tam_biet
+
+- story: chao-chuacotk-taotk-camon-chucnang
+  steps:
+  - intent: chao_hoi
+  - action: utter_chao_hoi
+  - intent: speak_chao_hoi
+  - action: action_utter_speak_chao_hoi
+  - intent: no_account
+  - action: utter_no_account
+  - intent: speak_no_account
+  - action: action_utter_speak_no_account
+  - intent: create_account
+  - action: utter_ask_create_account
+  - intent: speak_ask_create_account
+  - action: action_utter_speak_ask_create_account
+  - intent: cam_on
+  - action: utter_cam_on
+  - intent: speak_cam_on
+  - action: action_utter_speak_cam_on
+  - intent: chuc_nang
+  - action: utter_chuc_nang
+  - intent: speak_chuc_nang
+  - action: action_utter_speak_chuc_nang
+
+- story: chuacotk-dscourses-dkkhoahoc-camon-dsteacher
+  steps:
+  - intent: no_account
+  - action: utter_no_account
+  - intent: speak_no_account
+  - action: action_utter_speak_no_account
+  - intent: courses_list
+  - action: action_query_courses
+  - intent: choose_courseid_to_register
+  - action: action_collect_infor
+  - intent: collect_info_register_course
+    entities:
+    - email
+  - action: action_ask_password_register_course
+  - intent: collect_info_register_course
+    entities:
+    - password
+  - action: action_ask_verify_mail_register_course
+  - intent: cam_on
+  - action: utter_cam_on
+  - intent: speak_cam_on
+  - action: action_utter_speak_cam_on
+  - intent: teachers_list
+  - action: action_query_teachers

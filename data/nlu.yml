@@ -1,0 +1,294 @@
+version: "3.1"
+
+nlu:
+
+- intent: chao_hoi
+  examples: |
+    - xin chào
+    - chào bạn
+    - chào nhé
+    - chào cậu
+    - chào mọi người
+    - xin chào chatbot
+    - chao
+    - ê
+    - lô
+    - alo
+    - chào bạn ơi
+    - chào bạn nhé
+    - xin chào bot
+    - chào chatbot nhé
+    - chào bạn của tôi
+    - chào bạn thân
+    - lô bạn
+    - cậu ơi
+    - hi
+    - hế nhô
+
+- intent: cam_on
+  examples: |
+      - cam on
+      - camon
+      - cảm ơn nhé
+      - cám ơn rất nhiều
+      - chân thành cảm ơn
+      - cam on rat nhieu
+      - hay đấy
+      - hay quá
+      - hay day
+      - cám ơn bạn
+      - cam on ban
+      - bạn đã giúp tôi
+      - cám ơn bạn đã giúp
+      - cám ơn đã hỗ trợ
+      - cảm ơn vì đã hỗ trợ
+
+- intent: chuc_nang
+  examples: |
+    - bạn có thể làm gì?
+    - bạn làm được gì?
+    - chức năng của bạn là gì?
+    - bạn giúp gì được cho tôi?
+    - có thể làm gì?
+    - bạn có thể giúp tôi với những gì?
+    - nhiệm vụ của bạn là gì?
+    - bạn có thể hỗ trợ tôi như thế nào?
+    - có chức năng gì mà tôi có thể sử dụng?
+    - bạn có thể thực hiện những tác vụ nào?
+    - điều gì bạn có thể làm cho tôi?
+    - chức năng chính của bạn là gì?
+    - bạn có thể giúp tôi như thế nào?
+    - bạn có những chức năng gì?
+    - có gì đặc biệt mà bạn có thể làm không?
+    - Bạn làm gì cho người dùng?
+    - Chức năng chính của bạn là gì vậy?
+    - Bạn có thể hỗ trợ tôi như thế nào?
+    - Nhiệm vụ của bạn là gì trong hệ thống?
+    - Bot có thể giúp gì cho tôi?
+
+- intent: tam_biet
+  examples: |
+    - tôi đi đây
+    - bái bai
+    - tạm biệt
+    - hẹn gặp lại
+    - tôi phải đi rồi, hẹn gặp lại nhé
+    - bye bye, mong sớm gặp lại
+    - chúc bạn một ngày tốt lành, tạm biệt
+    - tôi phải tan rồi, chào bạn
+    - hẹn gặp lại vào lần sau nhé
+    - tạm biệt bạn, chúc một ngày vui vẻ
+    - tôi phải rời khỏi đây, chúc bạn mọi điều tốt lành
+    - tạm biệt bạn, chúc một ngày tràn đầy năng lượng
+    - tôi đi đây, chúc bạn một ngày thật thành công
+    - bye, mong bạn có một ngày vui vẻ
+    - tôi sẽ quay lại sau, tạm biệt
+    - Tạm biệt bạn, hẹn gặp lại vào dịp khác nhé
+    - Hẹn gặp lại bạn sau nhé, tạm biệt
+    - hẹn ngày tái ngộ
+    - xin chào và không hẹn gặp lại
+    - baibai
+
+- intent: bot_challenge
+  examples: |
+    - tôi đang nói chuyện với ai?
+    - tôi và ai đang nói chuyện vậy?
+    - bạn là bot hay người?
+    - bot có phải là bạn không?
+    - bạn là ai?
+    - bạn là người hay là bot?
+    - có phải bạn là một trí tuệ nhân tạo không?
+    - tôi đang trò chuyện với một bot phải không?
+    - mình đang liên lạc với trí tuệ nhân tạo?
+    - liệu bạn có phải là một ứng dụng tự động không?
+    - có phải bạn không phải là người thực sự?
+    - tôi có đang giao tiếp với một chương trình máy tính không?
+    - có phải bạn là một phần mềm tự động trả lời không?
+    - Bạn là trí tuệ nhân tạo phải không?
+    - Có phải bạn là một bot không?
+    - Bạn có phải là chương trình tự động không?
+    - Tôi đang nói chuyện với một AI đúng không?
+    - Bạn là một phần mềm tự động trả lời, đúng không?
+    - Bot này là của công ty phải không?
+    - Bạn có phải là một ứng dụng trò chuyện không?
+
+- intent: teachers_list
+  examples: |
+    - cho tôi danh sách giảng viên
+    - liệt kê danh sách giảng viên
+    - danh sách giảng viên hiện tại
+    - hiện tại có những giảng viên nào của trung tâm?
+    - những giảng viên nào đang giảng dạy ở trung tâm?    
+    - có những giáo viên nào đang làm việc tại trung tâm hiện nay?
+    - cho biết tên các giáo viên đang có mặt trong đội ngũ giảng dạy của trung tâm
+    - xin được biết danh sách đầy đủ các giáo viên đang phụ trách các khóa học ở đây
+    - ai là các giáo viên chủ nhiệm của các lớp học tại trung tâm?
+    - có bao nhiêu giáo viên đang làm việc tại trung tâm và họ là ai?
+    - Danh sách giảng viên là gì?
+    - Cho tôi biết danh sách đầy đủ các giáo viên
+    - Có ai là giáo viên tại trung tâm hiện tại không?
+    - Danh sách giảng viên đang giảng dạy ở đâu?
+    - Xin danh sách giáo viên hiện đang làm việc
+    - Tôi muốn biết thông tin về các giáo viên
+    - Có những ai là giáo viên ở đây?
+    - Danh sách giảng viên bao gồm những ai?
+    - Liệt kê danh sách các giáo viên
+    - Tôi cần biết danh sách giáo viên đang làm việc
+
+- intent: dia_chi
+  examples: |
+    - xin vui lòng cho biết địa chỉ của trung tâm là gì?
+    - cho tôi biết nơi trung tâm đặt ở địa chỉ nào được không?
+    - địa chỉ của trung tâm là gì vậy?
+    - có thể cho tôi biết địa chỉ của trung tâm không?
+    - trung tâm có địa chỉ ở đâu?
+    - cho tôi biết địa chỉ cụ thể của trung tâm là gì?
+    - nơi trung tâm đặt có thể được mô tả như thế nào?
+    - địa chỉ chính xác của trung tâm là gì?
+    - xin vui lòng cung cấp thông tin về địa chỉ của trung tâm.
+    - trung tâm nằm ở đâu?
+    - trung tâm nằm ở đường nào?
+    - Cho tôi biết trung tâm đặt ở đâu vậy?
+    - Địa chỉ cụ thể của trung tâm là gì?
+    - Nơi trung tâm đặt có thể được mô tả ra sao?
+    - Địa chỉ chính xác của trung tâm là gì vậy?
+    - Có thể cung cấp thông tin về địa chỉ của trung tâm không?
+    - Trung tâm nằm ở đâu chính xác?
+    - Xin vui lòng cho biết nơi trung tâm đặt ở đâu
+    - Trung tâm nằm ở đường nào ạ?
+    - Địa chỉ cụ thể của trung tâm có thể được mô tả như thế nào?
+
+- intent: thoi_gian
+  examples: |  
+    - trung tâm mở cửa vào thời gian nào?
+    - xin hỏi thời gian mở cửa của trung tâm là khi nào?
+    - trung tâm hoạt động vào khoảng thời gian nào trong ngày?
+    - trung tâm mở cửa vào thời gian nào và đóng cửa vào lúc nào?
+    - thời gian mở cửa và đóng cửa của trung tâm là khi nào?
+    - cho biết thời gian hoạt động và giờ đóng cửa của trung tâm?
+    - trung tâm mở cửa vào những giờ nào trong ngày?
+    - thời gian hoạt động của trung tâm là bao lâu mỗi ngày?
+    - khi nào trung tâm mở cửa và đóng cửa?
+    - thời gian mở cửa của trung tâm được quy định như thế nào?
+    - giờ làm việc của trung tâm là gì?
+    - Trung tâm mở cửa vào khoảng thời gian ?
+    - Giờ làm việc của trung tâm là gì vậy?
+    - Cho hỏi thời gian mở cửa và đóng cửa của trung tâm là khi nào?
+    - Khi nào là giờ làm việc của trung tâm?
+    - Thời gian mở cửa của trung tâm được quy định ra sao
+    - mở cửa vào thời gian nào và kết thúc hoạt động vào lúc nào?
+    - Xin vui lòng cho biết giờ làm việc của trung tâm
+    - Thời gian hoạt động của trung tâm được xác định như thế nào?
+    - Giờ giấc hoạt động của trung tâm?
+
+- intent: no_account
+  examples: |
+    - Tôi chưa có tài khoản
+    - Tôi vẫn chưa đăng ký tài khoản
+    - Tôi chưa có thông tin đăng nhập
+    - Tôi chưa thể truy cập vào hệ thống vì không có tài khoản
+    - Tôi chưa đăng ký tài khoản trên nền tảng này
+    - Tôi muốn sử dụng dịch vụ nhưng chưa có tài khoản
+    - làm thế nào để đăng ký tài khoản trên hệ thống này?
+    - tôi cần tạo một tài khoản mới để truy cập vào các tính năng của trang web.
+    - xin lỗi, tôi chưa có thông tin đăng nhập vào hệ thống
+    - làm sao để đăng ký một tài khoản mới trên trang này?
+    - Tôi chưa có tài khoản để sử dụng
+    - Làm sao để đăng ký một tài khoản trên hệ thống này?
+    - Tôi cần tạo một tài khoản để truy cập vào dịch vụ
+    - tôi vẫn chưa đăng ký tài khoản
+    - Tôi muốn đăng ký tài khoản để truy cập vào các tính năng của trang web
+    - Làm thế nào để đăng ký tài khoản trên nền tảng này?
+    - Tôi chưa có thông tin đăng nhập vào hệ thống, làm thế nào để đăng ký?
+    - Tôi cần đăng ký một tài khoản mới để sử dụng dịch vụ
+    - Làm thế nào để tạo một tài khoản mới trên trang này?
+    - Tôi muốn đăng ký một tài khoản để truy cập vào các chức năng của trang web
+
+- intent: create_account
+  examples: |
+    - tôi muốn đăng ký tài khoản?
+    - đăng ký tài khoản như thế nào?
+    - tài khoản đăng ký như nào?
+    - tạo tài khoản mới
+    - tạo tài khoản?
+    - tôi muốn tạo một tài khoản mới
+    - làm cách nào để đăng ký tài khoản?
+    - có thể hướng dẫn cách tạo tài khoản không?
+    - cho tôi đăng ký một tài khoản mới
+    - tạo tài khoản làm sao?
+    - muốn đăng ký tài khoản mới thì phải làm gì?
+    - Bạn có thể đăng ký tài khoản giúp tôi không?
+    - đăng ký tài khoản mới giúp tôi
+    - đăng ký tài khoản 
+    - dang ky tai khoan moi
+    - tôi cần đăng ký tài khoản mới
+    - toi can dang ky tai khoan moi
+    - tao tai khoan
+    - huong dan dang ky tài khoan moi
+    - huong dan tao tai khoan moi
+
+- intent: courses_list
+  examples: |
+    - Khóa học nào đang được mở ở trung tâm?
+    - Trung tâm đang có những khóa học nào?
+    - Có những khóa học cụ thể nào đang được mở tại trung tâm trong thời gian này?
+    - Trung tâm hiện đang tổ chức những khóa học gì và lịch trình của chúng ?
+    - Bạn có thể cung cấp danh sách các khóa học đang mở ở trung tâm không?
+    - Trung tâm có kế hoạch mở thêm những khóa học mới trong tương lai không?
+    - tôi muốn biết về các khóa học đang được tổ chức tại trung tâm
+    - có những lớp học nào đang mở ở trung tâm hiện nay?
+    - cho tôi xem danh sách các khóa học đang có tại trung tâm
+    - Giới thiệu về các khóa học trung tâm
+    - tôi quan tâm đến các khóa học có sẵn tại trung tâm. Bạn có thể giúp được gì không?
+    - Trung tâm đang tổ chức những khóa học nào trong thời gian này?
+    - Cho tôi biết về các khóa học đang mở tại trung tâm
+    - Có những lớp học nào đang tổ chức ở trung tâm hiện nay?
+    - Cho biết danh sách các khóa học đang có tại trung tâm
+    - Giới thiệu về các khóa học đang tổ chức tại trung tâm không?
+    - Các khóa học hiện có tại trung tâm
+    - Trung tâm có kế hoạch mở thêm những khóa học mới trong thời gian sắp tới không?
+    - Tôi muốn biết về lịch trình của các khóa học đang tổ chức tại trung tâm
+    - Cung cấp thông tin về các khóa học đang mở tại trung tâm không?
+
+- intent: collect_info_register_course
+  examples: |
+    - Email của tôi là [ngvanA@gmail.com](email)
+    - Mật khẩu tôi sử dụng là [vana@12345](password)
+    - Email là [bao2016946@gmail.com](email)
+    - mat khau toi su dung la [123465789](password)
+    - email la [duybaonguyen4@gmail.com](email)
+    - Mật khẩu của tôi là [minh123](password)
+    - Email tôi đang dùng là [OkGoogle@gmail.com](email)
+    - mat khau cua toi la [tranb67890](password)
+    - email toi dang dung la [diemamonnay@gmail.com](email)
+    - Mật khẩu là [152002duybao](password)
+    - [QuaTuyetVoi@gmail.com](email) là emal của tôi
+    - mat khau la [7&VxMS!Z](password)
+    - [ngvanA@gmail.com](email) la email cua toi
+    - Mật khẩu [Conlaumoinoi](password)
+    - Tôi đang sử dụng email [tranB@gmail.com](email)
+    - mat khau [AnhLaVoDich@123](password)
+    - toi dang su dung email [b2016946@gmail.com](email)
+    - Mật khẩu của email trên là [khongmotaibiet](password)
+    - email tôi thường dùng là [sdfbui@gmail.com](email)
+    - mat khau cua email tren la [Cogidaumanoi](password)
+    - email toi thuong dung la [baob2016946@student.ctu.edu.vn](email)
+    - Tôi sử dụng mật khẩu là [15@duybao](password)
+    - email để đăng ký là [khangb2016975@student.ctu.edu.vn](email)
+    - toi su dung mat khau la [conlaumoinoi](password)
+    - email de dang ky la [duybao152002@gmail.com](email)
+    - Mật khẩu đăng ký khóa học là [svlvtpl](password)
+    - [ltdao@ctu.edu.vn](email) là email dùng để đăng ký
+    - mat khau dang ky khoa hoc la [ngaymaiemlaychong](password)
+    - [nienluan@gmail.com](email) la email dung de dang ky
+    - password [123@baonguyen](password)
+    - email đăng ký khóa học là [quabong992@gmail.com](email)
+    - password là [bao!!nguyenooo](password)
+    - email dang ky khoa hoc la [15duybao2002@gmail.com](email)
+    - password tôi sử dụng là [KhongConGiDeNoi](password)
+    - [daihoccantho@gmail.com](email) là email tôi đang dùng
+    - password toi su dung la [BuonLamEmOi](password)
+    - email cua toi la [tranB@gmail.com](email)
+    - [0932941255#bbb](password) là mật khẩu của tôi
+    - [thaicong@gmail.com](email) la email toi dang dung
+    - [bao_nguyen15](password) la password cua toi

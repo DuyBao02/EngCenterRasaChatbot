@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <style>
+        #chat-container {
+            width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        #chat-messages {
+            height: 300px;
+            overflow-y: auto;
+        }
+        #user-input {
+            width: calc(100% - 80px);
+            margin-right: 10px;
+        }
+        #send-button {
+            width: 70px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-messages"></div>
+        <div>
+            <input type="text" id="user-input" placeholder="Type your message...">
+            <button id="send-button">Send</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const chatMessages = document.getElementById('chat-messages');
+            const userInput = document.getElementById('user-input');
+            const sendButton = document.getElementById('send-button');
+
+            sendButton.addEventListener('click', function() {
+                const userMessage = userInput.value.trim();
+                if (userMessage !== '') {
+                    appendMessage('You', userMessage);
+                    userInput.value = '';
+                    sendMessage(userMessage);
+                }
+            });
+
+            function appendMessage(sender, message) {
+                const messageElement = document.createElement('div');
+                messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+                chatMessages.appendChild(messageElement);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function sendMessage(message) {
+                fetch('/webhook', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    const botResponse = data.response;
+                    if (data.buttons) {
+                        appendButtons(data.buttons);
+                    } else {
+                        appendMessage('Bot', botResponse);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            }
+
+            function appendButtons(buttons) {
+                const buttonsContainer = document.createElement('div');
+                buttons.forEach(button => {
+                    const buttonElement = document.createElement('button');
+                    buttonElement.innerText = button.title;
+                    buttonElement.addEventListener('click', function() {
+                        window.open(`http://google.com?q=${button.title}`, '_blank');
+                    });
+                    buttonsContainer.appendChild(buttonElement);
+                });
+                chatMessages.appendChild(buttonsContainer);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+<!--<html>-->
+<!--  <head>-->
+<!--    <title>Chatbot Widget</title>-->
+
+<!--    &lt;!&ndash;Let browser know website is optimized for mobile&ndash;&gt;-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0" />-->
+<!--    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />-->
+<!--    <meta content="utf-8" http-equiv="encoding" />-->
+
+<!--    &lt;!&ndash;Import Google Icon Font&ndash;&gt;-->
+<!--    <link-->
+<!--      href="https://fonts.googleapis.com/icon?family=Material+Icons"-->
+<!--      rel="stylesheet"-->
+<!--    />-->
+<!--    <link rel="preconnect" href="https://fonts.gstatic.com" />-->
+<!--    <link-->
+<!--      href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap"-->
+<!--      rel="stylesheet"-->
+<!--    />-->
+<!--    <link-->
+<!--      href="https://fonts.googleapis.com/css?family=Raleway:500&display=swap"-->
+<!--      rel="stylesheet"-->
+<!--    />-->
+
+<!--    <link rel="preconnect" href="https://fonts.gstatic.com" />-->
+<!--    <link-->
+<!--      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"-->
+<!--      rel="stylesheet"-->
+<!--    />-->
+
+<!--    <link rel="preconnect" href="https://fonts.gstatic.com" />-->
+<!--    <link-->
+<!--      href="https://fonts.googleapis.com/css2?family=Lato&display=swap"-->
+<!--      rel="stylesheet"-->
+<!--    />-->
+
+<!--    &lt;!&ndash;Import Font Awesome Icon Font&ndash;&gt;-->
+<!--    <link-->
+<!--      rel="stylesheet"-->
+<!--      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"-->
+<!--      integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0="-->
+<!--      crossorigin="anonymous"-->
+<!--    />-->
+
+<!--    &lt;!&ndash;Import materialize.css&ndash;&gt;-->
+<!--    <link-->
+<!--      rel="stylesheet"-->
+<!--      type="text/css"-->
+<!--      href="static/css/materialize.min.css"-->
+<!--    />-->
+
+<!--    &lt;!&ndash;Main css&ndash;&gt;-->
+<!--    <link rel="stylesheet" type="text/css" href="static/css/style.css" />-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1" />-->
+<!--  </head>-->
+
+<!--  <body>-->
+<!--    <div class="container">-->
+<!--      &lt;!&ndash; Modal for rendering the charts, declare this if you want to render charts,-->
+<!--         else you remove the modal &ndash;&gt;-->
+<!--      <div id="modal1" class="modal">-->
+<!--        <canvas id="modal-chart"></canvas>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash;chatbot widget &ndash;&gt;-->
+<!--      <div class="widget">-->
+<!--        <div class="chat_header">-->
+<!--          &lt;!&ndash;Add the name of the bot here &ndash;&gt;-->
+<!--          <span class="chat_header_title">Sara</span>-->
+<!--          <span class="dropdown-trigger" href="#" data-target="dropdown1">-->
+<!--            <i class="material-icons"> more_vert </i>-->
+<!--          </span>-->
+
+<!--          &lt;!&ndash; Dropdown menu&ndash;&gt;-->
+<!--          <ul id="dropdown1" class="dropdown-content">-->
+<!--            <li><a href="#" id="clear">Clear</a></li>-->
+<!--            <li><a href="#" id="restart">Restart</a></li>-->
+<!--            <li><a href="#" id="close">Close</a></li>-->
+<!--          </ul>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash;Chatbot contents goes here &ndash;&gt;-->
+<!--        <div class="chats" id="chats">-->
+<!--          <div class="clearfix"></div>-->
+<!--        </div>-->
+
+<!--        &lt;!&ndash;keypad for user to type the message &ndash;&gt;-->
+<!--        <div class="keypad">-->
+<!--          <textarea-->
+<!--            id="userInput"-->
+<!--            placeholder="Type a message..."-->
+<!--            class="usrInput"-->
+<!--          ></textarea>-->
+<!--          <div id="sendButton">-->
+<!--            <i class="fa fa-paper-plane" aria-hidden="true"></i>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash;bot profile&ndash;&gt;-->
+<!--      <div class="profile_div" id="profile_div">-->
+<!--        <img class="imgProfile" src="static/img/botAvatar.png" />-->
+<!--      </div>-->
+
+<!--      &lt;!&ndash; Bot pop-up intro &ndash;&gt;-->
+<!--      <div class="tap-target" data-target="profile_div">-->
+<!--        <div class="tap-target-content">-->
+<!--          <h5 class="white-text">Hey there 👋</h5>-->
+<!--          <p class="white-text">-->
+<!--            I can help you get started with Rasa and answer your technical-->
+<!--            questions.-->
+<!--          </p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash;JavaScript at end of body for optimized loading&ndash;&gt;-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>-->
+<!--    <script-->
+<!--      type="text/javascript"-->
+<!--      src="static/js/lib/materialize.min.js"-->
+<!--    ></script>-->
+<!--    <script src="static/js/lib/uuid.min.js"></script>-->
+<!--    &lt;!&ndash;Main Script &ndash;&gt;-->
+<!--    <script type="text/javascript" src="static/js/script.js"></script>-->
+
+<!--    &lt;!&ndash;Chart.js Script &ndash;&gt;-->
+<!--    <script type="text/javascript" src="static/js/lib/chart.min.js"></script>-->
+<!--    <script type="text/javascript" src="static/js/lib/showdown.min.js"></script>-->
+<!--  </body>-->
+<!--</html>-->
+
+<!-- <div id="rasa-chat-widget" data-websocket-url="http://localhost:5005"></div>
+<script src="https://unpkg.com/@rasahq/rasa-chat" type="application/javascript"></script>
+<script>
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'vi-VN'; // Cài đặt ngôn ngữ
+    recognition.interimResults = false;
+
+    recognition.onresult = (event) => {
+        const transcript = event.results[0][0].transcript;
+        document.querySelector('#rasa-chat-widget input').value = transcript;
+        document.querySelector('#rasa-chat-widget form').submit();
+    };
+
+    function startRecognition() {
+        recognition.start();
+    }
+</script>
+<button onclick="startRecognition()">Nói</button> -->
